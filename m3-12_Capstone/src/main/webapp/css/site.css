@@ -1,0 +1,52 @@
+body {
+	font-family: Helvetica, Arial, sans-serif;
+}
+
+#container {
+	display: flex;
+	flex-direction: column;
+}
+
+.park {
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+}
+
+.park h1 {
+	display: block;
+	margin: 0;
+	padding: 0;
+}
+
+.parkText {
+	margin: 1%;
+	padding: 1%;
+}
+
+#logo img {
+	width: 35%;
+	height: auto;
+}
+
+#navbar {
+	background-color: DodgerBlue;
+	width: 100%;
+}
+
+#navbar a {
+	color: white;
+	text-decoration: none;
+}
+
+#navbar ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: inline;
+}
+
+#navbarList {
+	display: flex;
+	flex-direction: row;
+}
