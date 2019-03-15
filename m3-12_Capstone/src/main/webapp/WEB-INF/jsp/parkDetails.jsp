@@ -59,29 +59,9 @@
 					</c:otherwise>
 				</c:choose>
 				<c:out value="${dailyWeather.forecast}"/>
-				<c:choose>
-					<c:when test="${dailyWeather.forecast == 'rain'}">
-						<c:out value="Pack rain gear and waterproof shoes!"/>
-					</c:when>
-					<c:when test="${dailyWeather.forecast == 'thunderstorms'}">
-						<c:out value="Seek shelter and avoid hiking on exposed ridges!"/>
-					</c:when>
-					<c:when test="${dailyWeather.forecast == 'snow'}">
-						<c:out value="Pack snow shoes!"/>
-					</c:when>
-					<c:when test="${dailyWeather.forecast == 'sunny'}">
-						<c:out value="Pack sunblock!"/>
-					</c:when>
-					<c:when test="${dailyWeather.highTemperature > 75}">
-						<c:out value="Bring an extra gallon of water!"/>
-					</c:when>
-					<c:when test="${dailyWeather.highTemperature - dailyWeather.lowTemperature > 20}">
-						<c:out value="Wear breathable layers!"/>
-					</c:when>
-					<c:when test="${(dailyWeather.highTemperature < 20) || (dailyWeather.lowTemperature < 20)}">
-						<c:out value="Danger!  Frigid temperatures!"/>
-					</c:when>
-				</c:choose>
+				<c:out value="${dailyWeather.weatherAdvisory}"/>
+				<c:out value="${dailyWeather.tempAdvisory}"/>
+				<c:out value="${dailyWeather.differenceInTempAdvisory}"/>
 			</c:forEach>
 		</div>
 	</div>

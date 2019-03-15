@@ -42,5 +42,37 @@ public class Weather {
 	public void setForecast(String forecast) {
 		this.forecast = forecast;
 	}
+	
+	public String getWeatherAdvisory() {
+		 
+		if (forecast.equals("rain")) {
+			return "Pack rain gear and waterproof shoes!";
+		} else if (forecast.equals("thunderstorms")) {
+			return "Seek shelter and avoid hiking on exposed ridges!";
+		} else if (forecast.equals("snow")) {
+			return "Pack snow shoes!";
+		} else if (forecast.equals("sunny")) {
+			return "Pack sunblock!";
+		}
+		return "";
+	}
+	
+	public String getTempAdvisory() {
+		
+		if (highTemperature > 75 || lowTemperature > 75) {
+			return "Bring an extra gallon of water!";
+		} else if (highTemperature < 20 || lowTemperature < 20) {
+			return "Danger! Frigid temperatures! FROST BITE may occur";
+		}
+		return "";
+	}
+	
+	public String getDifferenceInTempAdvisory() {
+		if (highTemperature - lowTemperature > 20) {
+			return "Wear breathable layers!";
+		}
+		return "";
+	}
+	
 
 }

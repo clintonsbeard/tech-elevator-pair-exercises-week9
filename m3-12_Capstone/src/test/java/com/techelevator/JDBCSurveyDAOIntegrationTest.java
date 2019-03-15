@@ -1,28 +1,18 @@
 package com.techelevator;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.datasource.SingleConnectionDataSource;
 
-import com.techelevator.npgeek.model.Park;
 import com.techelevator.npgeek.model.Survey;
-import com.techelevator.npgeek.model.jdbc.JDBCParkDAO;
 import com.techelevator.npgeek.model.jdbc.JDBCSurveyDAO;
 
 public class JDBCSurveyDAOIntegrationTest extends DAOIntegrationTest {
 
-	private String parkCode;
-	private static SingleConnectionDataSource dataSource;
 	private JDBCSurveyDAO dao;
 	private JdbcTemplate jdbcTemplate;
-	private Park controlPark;
 
 	@Before
 	public void setupTest() {

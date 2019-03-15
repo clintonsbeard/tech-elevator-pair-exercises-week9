@@ -18,8 +18,6 @@ import com.techelevator.npgeek.model.jdbc.JDBCSurveyDAO;
 
 public class JDBCParkDAOIntegrationTest extends DAOIntegrationTest {
 
-	private String parkCode;
-	private static SingleConnectionDataSource dataSource;
 	private JDBCParkDAO dao;
 	private JDBCSurveyDAO surveyDao;
 	private JdbcTemplate jdbcTemplate;
