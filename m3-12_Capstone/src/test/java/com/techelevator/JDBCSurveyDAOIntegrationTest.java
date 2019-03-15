@@ -3,6 +3,7 @@ package com.techelevator;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Before;
@@ -20,8 +21,8 @@ public class JDBCSurveyDAOIntegrationTest extends DAOIntegrationTest {
 	private String parkCode;
 	private static SingleConnectionDataSource dataSource;
 	private JDBCSurveyDAO dao;
-	private JDBCParkDAO parkDAO;
 	private JdbcTemplate jdbcTemplate;
+	private Park controlPark;
 
 	@Before
 	public void setupTest() {
@@ -31,12 +32,10 @@ public class JDBCSurveyDAOIntegrationTest extends DAOIntegrationTest {
 
 	@Test
 	public void new_surveys_are_inserted_to_database() {
-	
 	    // Arrange
-	    
 	    Survey theSurvey = getSurvey("CVNP", "testEmail@test.com", "Ohio", "inactive");
 	    int count = jdbcTemplate.queryForObject("SELECT COUNT(activitylevel) FROM survey_result WHERE parkcode = 'CVNP'", Integer.class);
-	    
+	   
 	    // Act 1 : Insert
 	    dao.save(theSurvey);
 	    int newSize = jdbcTemplate.queryForObject("SELECT COUNT(activitylevel) FROM survey_result WHERE parkcode = 'CVNP'", Integer.class);
@@ -54,15 +53,4 @@ public class JDBCSurveyDAOIntegrationTest extends DAOIntegrationTest {
 	    return theSurvey;
 	}
 	
-<<<<<<< HEAD
-//	private void assertCitiesAreEqual(List<Park> expected, List<Park> actual) {
-//		assertEquals(expected.get), actual.getId());
-//		assertEquals(expected.getName(), actual.getName());
-//		assertEquals(expected.getDistrict(), actual.getDistrict());
-//		assertEquals(expected.getCountryCode(), actual.getCountryCode());
-//		assertEquals(expected.getPopulation(), actual.getPopulation());
-//	}
 }
-=======
-}
->>>>>>> 7f0febcc45ac2d9b754a560fe2512927c297ebda

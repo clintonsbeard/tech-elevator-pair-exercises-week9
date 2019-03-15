@@ -47,6 +47,7 @@ public class JDBCParkDAO implements ParkDAO {
 	@Override
 	public Park mapRowToFavoritePark(SqlRowSet results) {
 		Park park = new Park();
+		park.setCode(results.getString("parkcode"));
 		park.setName(results.getString("parkname"));
 		park.setSurveyCount(results.getInt("surveycount"));
 		return park;
@@ -71,7 +72,7 @@ public class JDBCParkDAO implements ParkDAO {
 	public List<Park> getFavoriteParks() {
 		List<Park> parks = new ArrayList<>();
 		
-		String sqlFavoriteParks = "SELECT p.parkname, count(activitylevel) AS surveycount " +
+		String sqlFavoriteParks = "SELECT p.parkcode, p.parkname, count(activitylevel) AS surveycount " +
 								  "FROM survey_result sr LEFT JOIN park p ON p.parkcode = sr.parkcode " +
 								  "GROUP BY sr.parkcode, p.parkcode " +
 								  "ORDER BY surveycount DESC, p.parkcode";
