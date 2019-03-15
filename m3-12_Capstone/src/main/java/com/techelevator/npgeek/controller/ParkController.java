@@ -18,7 +18,6 @@ import com.techelevator.npgeek.model.Park;
 import com.techelevator.npgeek.model.ParkDAO;
 import com.techelevator.npgeek.model.Survey;
 import com.techelevator.npgeek.model.SurveyDAO;
-import com.techelevator.npgeek.model.Temperature;
 import com.techelevator.npgeek.model.Weather;
 import com.techelevator.npgeek.model.WeatherDAO;
 
@@ -36,7 +35,6 @@ public class ParkController {
 	private SurveyDAO surveyDAO;
 	
 	List<Weather> weather;
-	List<Temperature> temperatures;
 	
 	@RequestMapping(path="/", method=RequestMethod.GET)
 	public String getAllParks(ModelMap map) {

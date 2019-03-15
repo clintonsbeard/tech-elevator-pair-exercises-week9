@@ -46,16 +46,18 @@
             
 			<c:forEach items="${weather}" var="dailyWeather">
 				<c:out value="${dailyWeather.day}"/>
-				<c:if test="${tempChoice.equals('C')}">
-					<fmt:formatNumber var="low" value="${(dailyWeather.lowTemperature - 32) / 1.8}" maxFractionDigits="0"/>
-					<fmt:formatNumber var="high" value="${(dailyWeather.highTemperature - 32) / 1.8}" maxFractionDigits="0"/>
-					<c:out value="Low: ${low}°C"/>
-					<c:out value="High: ${high}°C"/>
-				</c:if>
-				<c:if test="${tempChoice.equals('F')}">
-					<c:out value="Low: ${dailyWeather.lowTemperature}°F"/>
-					<c:out value="High: ${dailyWeather.highTemperature}°F"/>
-				</c:if>
+				<c:choose>
+					<c:when test="${tempChoice.equals('C')}">
+						<fmt:formatNumber var="low" value="${(dailyWeather.lowTemperature - 32) / 1.8}" maxFractionDigits="0"/>
+						<fmt:formatNumber var="high" value="${(dailyWeather.highTemperature - 32) / 1.8}" maxFractionDigits="0"/>
+						<c:out value="Low: ${low}°C"/>
+						<c:out value="High: ${high}°C"/>
+					</c:when>
+					<c:otherwise>
+						<c:out value="Low: ${dailyWeather.lowTemperature}°F"/>
+						<c:out value="High: ${dailyWeather.highTemperature}°F"/>
+					</c:otherwise>
+				</c:choose>
 				<c:out value="${dailyWeather.forecast}"/>
 				<c:choose>
 					<c:when test="${dailyWeather.forecast == 'rain'}">
