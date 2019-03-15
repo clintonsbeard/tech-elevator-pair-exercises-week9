@@ -33,12 +33,15 @@ public class JDBCSurveyDAOIntegrationTest extends DAOIntegrationTest {
 	public void new_surveys_are_inserted_to_database() {
 
 		// Arrange
+		
 		Survey theSurvey = getSurvey("CVNP", "testEmail@test.com", "Ohio", "inactive");
 		int count = jdbcTemplate.queryForObject("SELECT COUNT(activitylevel) FROM survey_result WHERE parkcode = 'CVNP'", Integer.class);
+		List<Park> favorites = parkDAO.getFavoriteParks();
 		
 		// Act 1 : Insert
 		dao.save(theSurvey);
 		int newSize = jdbcTemplate.queryForObject("SELECT COUNT(activitylevel) FROM survey_result WHERE parkcode = 'CVNP'", Integer.class);
+		List<Park> favoritesWithNewSurvey = parkDAO.getFavoriteParks();
 		
 		// Assert
 		assertEquals(count + 1, newSize);
