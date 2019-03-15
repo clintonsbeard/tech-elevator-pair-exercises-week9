@@ -55,4 +55,12 @@ public class JDBCSurveyDAOIntegrationTest extends DAOIntegrationTest {
 		theSurvey.setActivityLevel(activitylevel);
 		return theSurvey;
 	}
+	
+//	private void assertCitiesAreEqual(List<Park> expected, List<Park> actual) {
+//		assertEquals(expected.get), actual.getId());
+//		assertEquals(expected.getName(), actual.getName());
+//		assertEquals(expected.getDistrict(), actual.getDistrict());
+//		assertEquals(expected.getCountryCode(), actual.getCountryCode());
+//		assertEquals(expected.getPopulation(), actual.getPopulation());
+//	}
 }
