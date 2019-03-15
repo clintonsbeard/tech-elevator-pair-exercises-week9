@@ -14,8 +14,22 @@
 			<c:url value="img/parks/${park.code}.jpg" var="image"/>
 			<a href="${parkDetailURL}"><img src="${image}"></a>
 		</div>
+	 		
 		<div class="parkText">
+		
+			<c:url var="tempURL" value="/switchTemperature">
+				<c:param name="tempChoice" value="C"/>
+				<c:param name="parkCode" value="${park.code}"/>
+			</c:url>
+			<a href="${tempURL}"><c:out value="Celsius"/></a>
+			<c:url var="tempURL" value="/switchTemperature">
+				<c:param name="tempChoice" value="F"/>
+				<c:param name="parkCode" value="${park.code}"/>
+			</c:url>
+       		<a href="${tempURL}"><c:out value="Fahrenheit"/></a>
+       		
 			<h1><c:out value="${park.name}"/></h1>
+			
 			<c:out value="${park.parkDescription}"/>
 			<c:out value="${park.state}"/>
 			<c:out value="${park.acreage}"/>
@@ -29,12 +43,19 @@
 			<c:out value="${park.inspirationalQuoteSource}"/>
 			<c:out value="${park.entryFee}"/>
 			<c:out value="${park.numberOfAnimalSpecies}"/>
-			<hr>
-			
+            
 			<c:forEach items="${weather}" var="dailyWeather">
 				<c:out value="${dailyWeather.day}"/>
-				<c:out value="${dailyWeather.highTemperature}"/>
-				<c:out value="${dailyWeather.lowTemperature}"/>
+				<c:if test="${tempChoice.equals('C')}">
+					<fmt:formatNumber var="low" value="${(dailyWeather.lowTemperature - 32) / 1.8}" maxFractionDigits="0"/>
+					<fmt:formatNumber var="high" value="${(dailyWeather.highTemperature - 32) / 1.8}" maxFractionDigits="0"/>
+					<c:out value="Low: ${low}°C"/>
+					<c:out value="High: ${high}°C"/>
+				</c:if>
+				<c:if test="${tempChoice.equals('F')}">
+					<c:out value="Low: ${dailyWeather.lowTemperature}°F"/>
+					<c:out value="High: ${dailyWeather.highTemperature}°F"/>
+				</c:if>
 				<c:out value="${dailyWeather.forecast}"/>
 				<c:choose>
 					<c:when test="${dailyWeather.forecast == 'rain'}">

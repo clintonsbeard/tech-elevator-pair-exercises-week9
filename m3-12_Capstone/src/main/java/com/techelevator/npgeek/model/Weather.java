@@ -21,35 +21,50 @@ public class Weather {
 	public void setDay(int day) {
 		this.day = day;
 	}
-
+	
 	public int getLowTemperature() {
 		return lowTemperature;
 	}
 	public void setLowTemperature(int lowTemperature) {
 		this.lowTemperature = lowTemperature;
 	}
-
+	
 	public int getHighTemperature() {
 		return highTemperature;
 	}
 	public void setHighTemperature(int highTemperature) {
 		this.highTemperature = highTemperature;
 	}
-
+	
 	public String getForecast() {
 		return forecast;
 	}
 	public void setForecast(String forecast) {
 		this.forecast = forecast;
 	}
-
-	public int convertTemperature(int fahrenheit) {
-		if ("celsius" != null) {
-			double celsius = (fahrenheit - 32.0) / 1.8;
-			return (int) celsius;
-		}
-		else {
-			return fahrenheit;
-		}
+	
+	public String convertLowToCelsiusAndFormat() {
+		double lowDouble = (lowTemperature - 32.0) / 1.8;
+		int lowInt = (int) lowDouble;
+		String lowString = lowInt + "°C";
+		return lowString;
 	}
+	
+	public String convertHighToCelsiusAndFormat() {
+		double highDouble = (highTemperature - 32.0) / 1.8;
+		int highInt = (int) highDouble;
+		String highString = highInt + "°C";
+		return highString;
+	}
+	
+	public String formatLowFahrenheit() {
+		String lowString = lowTemperature + "°F";
+		return lowString;
+	}
+	
+	public String formatHighFahrenheit() {
+		String highString = highTemperature + "°F";
+		return highString;
+	}
+	
 }

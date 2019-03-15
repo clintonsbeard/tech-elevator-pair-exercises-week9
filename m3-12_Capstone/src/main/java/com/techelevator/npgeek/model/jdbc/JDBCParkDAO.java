@@ -41,7 +41,14 @@ public class JDBCParkDAO implements ParkDAO {
 		park.setParkDescription(results.getString("parkdescription"));
 		park.setEntryFee(results.getInt("entryfee"));
 		park.setNumberOfAnimalSpecies(results.getInt("numberofanimalspecies"));
-//		park.setSurveyCount(results.getInt("surveycount"));
+		return park;
+	}
+	
+	@Override
+	public Park mapRowToFavoritePark(SqlRowSet results) {
+		Park park = new Park();
+		park.setName(results.getString("parkname"));
+		park.setSurveyCount(results.getInt("surveycount"));
 		return park;
 	}
 
@@ -49,7 +56,7 @@ public class JDBCParkDAO implements ParkDAO {
 	public List<Park> getAllParks() {
 		List<Park> parks = new ArrayList<>();
 		
-		String sqlAllParks = "SELECT * FROM park";
+		String sqlAllParks = "SELECT * FROM park ORDER BY parkname";
 		
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlAllParks);
 
@@ -72,7 +79,7 @@ public class JDBCParkDAO implements ParkDAO {
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlFavoriteParks);
 
 		while (results.next()) {
-			Park p = mapRowToPark(results);
+			Park p = mapRowToFavoritePark(results);
 			parks.add(p);
 		}
 		return parks;
