@@ -16,46 +16,45 @@ import com.techelevator.npgeek.model.jdbc.JDBCParkDAO;
 import com.techelevator.npgeek.model.jdbc.JDBCSurveyDAO;
 
 public class JDBCSurveyDAOIntegrationTest extends DAOIntegrationTest {
-	
+
 	private String parkCode;
 	private static SingleConnectionDataSource dataSource;
 	private JDBCSurveyDAO dao;
 	private JDBCParkDAO parkDAO;
 	private JdbcTemplate jdbcTemplate;
-	
+
 	@Before
 	public void setupTest() {
 	    dao = new JDBCSurveyDAO(getDataSource());
 	    jdbcTemplate = new JdbcTemplate(getDataSource());
 	}
-	
+
 	@Test
 	public void new_surveys_are_inserted_to_database() {
+	
+	    // Arrange
+	    
+	    Survey theSurvey = getSurvey("CVNP", "testEmail@test.com", "Ohio", "inactive");
+	    int count = jdbcTemplate.queryForObject("SELECT COUNT(activitylevel) FROM survey_result WHERE parkcode = 'CVNP'", Integer.class);
+	    
+	    // Act 1 : Insert
+	    dao.save(theSurvey);
+	    int newSize = jdbcTemplate.queryForObject("SELECT COUNT(activitylevel) FROM survey_result WHERE parkcode = 'CVNP'", Integer.class);
+	    
+	    // Assert
+	    assertEquals(count + 1, newSize);
+	}
 
-		// Arrange
-		
-		Survey theSurvey = getSurvey("CVNP", "testEmail@test.com", "Ohio", "inactive");
-		int count = jdbcTemplate.queryForObject("SELECT COUNT(activitylevel) FROM survey_result WHERE parkcode = 'CVNP'", Integer.class);
-		List<Park> favorites = parkDAO.getFavoriteParks();
-		
-		// Act 1 : Insert
-		dao.save(theSurvey);
-		int newSize = jdbcTemplate.queryForObject("SELECT COUNT(activitylevel) FROM survey_result WHERE parkcode = 'CVNP'", Integer.class);
-		List<Park> favoritesWithNewSurvey = parkDAO.getFavoriteParks();
-		
-		// Assert
-		assertEquals(count + 1, newSize);
-	}
-	
 	private Survey getSurvey(String parkcode, String email, String state, String activitylevel) {
-		Survey theSurvey = new Survey();
-		theSurvey.setParkCode(parkcode);
-		theSurvey.setEmail(email);
-		theSurvey.setState(state);
-		theSurvey.setActivityLevel(activitylevel);
-		return theSurvey;
+	    Survey theSurvey = new Survey();
+	    theSurvey.setCode(parkcode);
+	    theSurvey.setEmail(email);
+	    theSurvey.setState(state);
+	    theSurvey.setActivityLevel(activitylevel);
+	    return theSurvey;
 	}
 	
+<<<<<<< HEAD
 //	private void assertCitiesAreEqual(List<Park> expected, List<Park> actual) {
 //		assertEquals(expected.get), actual.getId());
 //		assertEquals(expected.getName(), actual.getName());
@@ -64,3 +63,6 @@ public class JDBCSurveyDAOIntegrationTest extends DAOIntegrationTest {
 //		assertEquals(expected.getPopulation(), actual.getPopulation());
 //	}
 }
+=======
+}
+>>>>>>> 7f0febcc45ac2d9b754a560fe2512927c297ebda

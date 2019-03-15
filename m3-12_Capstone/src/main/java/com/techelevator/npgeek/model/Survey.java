@@ -6,7 +6,7 @@ import org.hibernate.validator.constraints.NotBlank;
 public class Survey {
 
 	@NotBlank(message="Park code is a required field.")
-	private String parkCode;
+	private String code;
 	
 	@NotBlank(message="Email is a required field.")
 	@Email(message="Email must be valid.")
@@ -18,11 +18,11 @@ public class Survey {
 	@NotBlank(message="Activity level is a required field.")
 	private String activityLevel;
 	
-	public String getParkCode() {
-		return parkCode;
+	public String getCode() {
+		return code;
 	}
-	public void setParkCode(String parkCode) {
-		this.parkCode = parkCode;
+	public void setCode(String code) {
+		this.code = code;
 	}
 	
 	public String getEmail() {
