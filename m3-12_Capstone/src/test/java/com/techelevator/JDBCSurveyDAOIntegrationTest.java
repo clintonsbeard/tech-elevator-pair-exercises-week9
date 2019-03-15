@@ -39,7 +39,6 @@ public class JDBCSurveyDAOIntegrationTest extends DAOIntegrationTest {
 		// Act 1 : Insert
 		dao.save(theSurvey);
 		int newSize = jdbcTemplate.queryForObject("SELECT COUNT(activitylevel) FROM survey_result WHERE parkcode = 'CVNP'", Integer.class);
-
 		
 		// Assert
 		assertEquals(count + 1, newSize);
