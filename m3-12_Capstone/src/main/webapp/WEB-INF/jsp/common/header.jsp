@@ -29,9 +29,6 @@
 				<li class="nav-item active">
 					<a href="<c:url value="/survey"/>" class="nav-link">Survey</a>
 				</li>
-				<li class="nav-item active">
-					<a href="<c:url value="/favoriteParks"/>" class="nav-link">Survey Results</a>
-				</li>
 			</ul>
 		</div>
 	</nav>

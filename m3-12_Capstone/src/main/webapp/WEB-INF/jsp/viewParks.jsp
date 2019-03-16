@@ -9,7 +9,7 @@
 	<c:forEach items="${parks}" var="park">
 		<div class="container-fluid">
 			<div class="row">
-				<div class="col-auto">
+				<div class="col view-parks">
 					<c:url var="parkDetailURL" value="/switchTemperature">
 	                	<c:param name="parkCode" value="${park.code}"/>
 	                </c:url>
@@ -29,6 +29,7 @@
 				</div>
 			</div>
 		</div>
+		<hr class="my-3">
 	</c:forEach>
 </div>
                 

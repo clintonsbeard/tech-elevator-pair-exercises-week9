@@ -7,7 +7,7 @@
 
 <div id="container">
 	<div class="page-header">
-  		<h1>National Park Geek Survey Results<small> What's your favorite national park?</small></h1>
+  		<h1>National Park Geek Survey Results<small class="text-muted"> What's your favorite national park?</small></h1>
 	</div>
 	<h3>Here are our current winners:</h3>
 	<table class="table table-striped">

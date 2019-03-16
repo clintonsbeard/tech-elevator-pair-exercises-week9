@@ -18,7 +18,6 @@ body {
     	padding-bottom: 3%;
 	}
 	.jumbotron h1 {
-		font-size: 300%;
 		font-weight: bold;
 	}
 	.jumbotron h1 a {
@@ -26,6 +25,9 @@ body {
 	}
 	.jumbotron h2 {
 		font-style: italic;
+	}
+	.badge-success {
+		background-color: #62CA13;
 	}
 }
 
@@ -40,10 +42,6 @@ body {
 	"navbar"
 	"content"
 	"footer";
-}
-
-small {
-	opacity: 0.5;
 }
 
 #header {
@@ -72,12 +70,6 @@ small {
 
 #content {
 	grid-area: content;
-}
-
-.park {
-	display: flex;
-	flex-direction: row;
-	width: 100%;
 }
 
 #footer {

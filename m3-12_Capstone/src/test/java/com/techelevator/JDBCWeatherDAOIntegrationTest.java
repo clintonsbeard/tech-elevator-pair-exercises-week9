@@ -28,7 +28,6 @@ public class JDBCWeatherDAOIntegrationTest extends DAOIntegrationTest {
 	
 	@Test
 	public void get_all_five_days_of_forecast() {
-		
 		//Arrange
 		//Act
 		List<Weather> forecast = dao.getFiveDayForecast("GNP");

@@ -8,11 +8,11 @@
 <div id="content">
 	<div class="container-fluid">
 		<div>
-			<c:url value="img/parks/${park.code}.jpg" var="image"/>
-			<img src="${image}" class="img-fluid img-thumbnail">
+			<c:url value="img/parks/${park.code}.jpg" var="parkImage"/>
+			<img src="${parkImage}" class="img-fluid img-thumbnail">
 		</div>
 		<div class="jumbotron">
-			<h1><a href="${parkDetailURL}"><c:out value="${park.name}"/></a></h1>
+			<h1 class="display-4"><c:out value="${park.name}"/> <span class="badge badge-secondary badge-success"><c:out value="${park.code.toUpperCase()}"/></span></h1>
 			<h2><strong><c:out value="Located in:"/></strong> <c:out value="${park.state}"/></h2>
 			<hr class="my-4">
 			<p><c:out value="${park.parkDescription}"/></p>
@@ -31,7 +31,7 @@
 						<h3><c:out value="Miles of Trail"/></h3>
 						<p><c:out value="${park.formatNumberWithCommas(park.milesOfTrail)} miles"/></p>
 						<h3><c:out value="Number of Campsites"/></h3>
-						<p><c:out value="${park.formatNumberWithCommas(park.numberOfCampsites)}"/></p>
+						<p><c:out value="${park.formatNumberWithCommas(park.numberOfCampsites)} campsites"/></p>
 					</div>
 					<div class="col">
 						<h3><c:out value="Climate"/></h3>
@@ -39,48 +39,94 @@
 						<h3><c:out value="Year Founded"/></h3>
 						<p><c:out value="${park.yearFounded}"/></p>
 						<h3><c:out value="Annual Visitor Count:"/></h3>
-						<p><c:out value="${park.formatNumberWithCommas(park.annualVisitorCount)}"/></p>
+						<p><c:out value="${park.formatNumberWithCommas(park.annualVisitorCount)} visitors"/></p>
 						<h3><c:out value="Entry Fee:"/></h3>
-						<p><c:out value="${park.entryFee}"/></p>
+						<p><c:out value="${park.formatMoney(park.entryFee)}"/></p>
 						<h3><c:out value="Number of Animal Species:"/></h3>
-						<p><c:out value="${park.numberOfAnimalSpecies}"/></p>
+						<p><c:out value="${park.numberOfAnimalSpecies} different animal species"/></p>
 					</div>
 				</div>
 			</div>
 		</div>
-		<div class="jumbotron">
+		<div class="container-fluid">
 			<div class="row">
-				<c:forEach items="${weather}" var="dailyWeather">
-					<div class="col">
-						<c:out value="${dailyWeather.day}"/>
-						<c:url var="tempURL" value="/switchTemperature">
-							<c:param name="tempChoice" value="C"/>
-							<c:param name="parkCode" value="${park.code}"/>
-						</c:url>
-						<a href="${tempURL}"><c:out value="Celsius"/></a>
-						<c:url var="tempURL" value="/switchTemperature">
-							<c:param name="tempChoice" value="F"/>
-							<c:param name="parkCode" value="${park.code}"/>
-						</c:url>
-			       		<a href="${tempURL}"><c:out value="Fahrenheit"/></a>
-						<c:choose>
-							<c:when test="${tempChoice.equals('C')}">
-								<fmt:formatNumber var="low" value="${(dailyWeather.lowTemperature - 32) / 1.8}" maxFractionDigits="0"/>
-								<fmt:formatNumber var="high" value="${(dailyWeather.highTemperature - 32) / 1.8}" maxFractionDigits="0"/>
-								<c:out value="Low: ${low}°C"/>
-								<c:out value="High: ${high}°C"/>
-							</c:when>
-							<c:otherwise>
-								<c:out value="Low: ${dailyWeather.lowTemperature}°F"/>
-								<c:out value="High: ${dailyWeather.highTemperature}°F"/>
-							</c:otherwise>
-						</c:choose>
-						<c:out value="${dailyWeather.forecast}"/>
+				<c:forEach items="${weather}" var="dailyWeather" varStatus="loop">
+					<c:choose>
+						<c:when test="${loop.index == 0}">
+							<div class="col-sm-3">
+								<c:url value="img/weather/${dailyWeather.forecast}.png" var="weatherImage"/>
+								<div class="thumbnail">
+									<img src="${weatherImage}" class="img-fluid img-thumbnail">
+										<div class="caption">
+										<h1><c:out value="${dailyWeather.getDayOfTheWeek(dailyWeather.day)}"/></h1>
+										<c:choose>
+											<c:when test="${tempChoice.equals('C')}">
+												<c:url var="tempURL" value="/switchTemperature">
+													<c:param name="tempChoice" value="F"/>
+													<c:param name="parkCode" value="${park.code}"/>
+												</c:url>
+												<h3><c:out value="Low: ${dailyWeather.conversionLowTempToCelsius}°C | "/>
+												<a href="${tempURL}"><c:out value="°F"/></a></h3>
+				                    			<h3><c:out value="High: ${dailyWeather.conversionHighTempToCelsius}°C | "/>
+				                    			<a href="${tempURL}"><c:out value="°F"/></a></h3>
+											</c:when>
+											<c:otherwise>
+												<c:url var="tempURL" value="/switchTemperature">
+													<c:param name="tempChoice" value="C"/>
+													<c:param name="parkCode" value="${park.code}"/>
+												</c:url>
+												<h3><c:out value="Low: ${dailyWeather.lowTemperature}°F | "/>
+												<a href="${tempURL}"><c:out value="°C"/></a></h3>
+				                    			<h3><c:out value="High: ${dailyWeather.highTemperature}°F | "/>
+				                    			<a href="${tempURL}"><c:out value="°C"/></a></h3>
+											</c:otherwise>
+										</c:choose>
+									</div>
+								</div>
+						</c:when>
+						<c:otherwise>
+							<div class="col-sm-2">
+								<c:url value="img/weather/${dailyWeather.forecast}.png" var="weatherImage"/>
+								<div class="thumbnail">
+									<img src="${weatherImage}" class="img-fluid img-thumbnail">
+									<div class="caption">
+									<h2><c:out value="${dailyWeather.getDayOfTheWeek(dailyWeather.day)}"/></h2>
+										<c:choose>
+											<c:when test="${tempChoice.equals('C')}">
+												<c:url var="tempURL" value="/switchTemperature">
+													<c:param name="tempChoice" value="F"/>
+													<c:param name="parkCode" value="${park.code}"/>
+												</c:url>
+												<h4><c:out value="Low: ${dailyWeather.conversionLowTempToCelsius}°C | "/>
+												<a href="${tempURL}"><c:out value="°F"/></a></h4>
+				                    			<h4><c:out value="High: ${dailyWeather.conversionHighTempToCelsius}°C | "/>
+				                    			<a href="${tempURL}"><c:out value="°F"/></a></h4>
+											</c:when>
+											<c:otherwise>
+												<c:url var="tempURL" value="/switchTemperature">
+													<c:param name="tempChoice" value="C"/>
+													<c:param name="parkCode" value="${park.code}"/>
+												</c:url>
+												<h4><c:out value="Low: ${dailyWeather.lowTemperature}°F | "/>
+												<a href="${tempURL}"><c:out value="°C"/></a></h4>
+				                    			<h4><c:out value="High: ${dailyWeather.highTemperature}°F | "/>
+				                    			<a href="${tempURL}"><c:out value="°C"/></a></h4>
+											</c:otherwise>
+										</c:choose>
+									</div>
+								</div>
+						</c:otherwise>
+					</c:choose>
+						<strong><c:out value="Forecast: "/></strong><c:out value="${dailyWeather.capitalizeFirstLetter(dailyWeather.forecast)}"/>
+						<strong><c:out value="Advisory: "/></strong>
+						<c:out value="${dailyWeather.weatherAdvisory}"/>
+            			<c:out value="${dailyWeather.tempAdvisory}"/>
+            			<c:out value="${dailyWeather.differenceInTempAdvisory}"/>
 					</div>
 				</c:forEach>
 			</div>
 	  	</div>
 	</div>
 </div>
-              
+
 <%@ include file="common/footer.jsp" %>

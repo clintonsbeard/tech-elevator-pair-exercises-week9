@@ -138,4 +138,10 @@ public class Park {
 		String numberWithCommas = NumberFormat.getNumberInstance(Locale.US).format(number);
 		return numberWithCommas;
 	}
+	
+	public String formatMoney(int number) {
+		NumberFormat formatter = NumberFormat.getCurrencyInstance();
+		String money = formatter.format(number);
+		return money;
+	}
 }
