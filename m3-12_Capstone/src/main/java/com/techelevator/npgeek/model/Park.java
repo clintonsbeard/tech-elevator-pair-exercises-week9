@@ -1,6 +1,7 @@
 package com.techelevator.npgeek.model;
 
-import java.util.List;
+import java.text.NumberFormat;
+import java.util.Locale;
 
 public class Park {
 
@@ -20,10 +21,6 @@ public class Park {
 	private int entryFee;
 	private int numberOfAnimalSpecies;
 	private int surveyCount;
-	
-	public Park() {
-
-	}
 	
 	public String getCode() {
 		return code;
@@ -137,4 +134,8 @@ public class Park {
 		this.surveyCount = surveyCount;
 	}
 	
+	public String formatNumberWithCommas(int number) {
+		String numberWithCommas = NumberFormat.getNumberInstance(Locale.US).format(number);
+		return numberWithCommas;
+	}
 }

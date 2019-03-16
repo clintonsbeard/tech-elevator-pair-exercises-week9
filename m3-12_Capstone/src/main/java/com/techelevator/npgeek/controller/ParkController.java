@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.techelevator.npgeek.model.Park;
 import com.techelevator.npgeek.model.ParkDAO;
@@ -81,14 +82,16 @@ public class ParkController {
 	}
 	
 	@RequestMapping(path="/survey", method=RequestMethod.POST)
-	public String postSurvey(@Valid @ModelAttribute("survey") Survey survey, BindingResult result) {
+	public String postSurvey(ModelMap map, @Valid @ModelAttribute("survey") Survey survey, BindingResult result, RedirectAttributes attr) {
 		if(result.hasErrors()) {
+			List<Park> parks = parkDAO.getAllParks();
+			map.addAttribute("parks", parks);
+			map.addAttribute("errors", true);
+			attr.addFlashAttribute("remember", survey);
 			return "survey"; 
 		}
-		else {
-			surveyDAO.save(survey);
-			return "redirect:/favoriteParks";
-		}
+		surveyDAO.save(survey);
+		return "redirect:/favoriteParks";
 	}
 	
 }

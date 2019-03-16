@@ -17,7 +17,7 @@
 		<c:url value="img/logo.png" var="logo"/>
 		<a href="${home}"><img src="${logo}" class="img-fluid"/></a>
 	</div>
-	<nav class="navbar navbar-expand-lg navbar-light navbar-dark bg-dark" id="navbar">
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark navbar-fixed-top" id="navbar">
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 	    	<span class="navbar-toggler-icon"></span>
 		</button>
@@ -28,6 +28,9 @@
 				</li>
 				<li class="nav-item active">
 					<a href="<c:url value="/survey"/>" class="nav-link">Survey</a>
+				</li>
+				<li class="nav-item active">
+					<a href="<c:url value="/favoriteParks"/>" class="nav-link">Survey Results</a>
 				</li>
 			</ul>
 		</div>

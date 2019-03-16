@@ -2,6 +2,33 @@ body {
 	font-family: Helvetica, Arial, sans-serif;
 }
 
+@font-face{ 
+	font-family: 'MyWebFont';
+	src: url('WebFont.eot');
+	src: url('WebFont.eot?iefix') format('eot'),
+	     url('WebFont.woff') format('woff'),
+	     url('WebFont.ttf') format('truetype'),
+	     url('WebFont.svg#webfont') format('svg');
+}
+
+@media (min-width: 576px) {
+	.jumbotron {
+		background-image: linear-gradient(to bottom right, rgba(255, 255, 255, 0.2), rgba(0, 0, 0, 0.1));
+		padding-top: 4%;
+    	padding-bottom: 3%;
+	}
+	.jumbotron h1 {
+		font-size: 300%;
+		font-weight: bold;
+	}
+	.jumbotron h1 a {
+		color: #62CA13;
+	}
+	.jumbotron h2 {
+		font-style: italic;
+	}
+}
+
 #content {
 	width: 100%;
 	margin: auto;
@@ -15,18 +42,32 @@ body {
 	"footer";
 }
 
+small {
+	opacity: 0.5;
+}
+
 #header {
 	grid-area: header;
+	padding: 1%;
 }
 
 #header img {
-	width: 50%;
+	width: 40%;
 	height: auto;
 }
 
 #navbar {
 	grid-area: navbar;
 	margin-bottom: 20px;
+}
+
+.error {
+	display: block;
+}
+
+.survey-row img {
+	width: 40%;
+	height: auto;
 }
 
 #content {
