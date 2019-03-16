@@ -129,7 +129,30 @@ public class WeatherTest {
 		//Assert
 		assertEquals("Danger! Frigid temperatures! FROST BITE may occur", actual);
 	}
+	 
+	@Test
+	public void low_temp_calculation_returns_correct_celsius_conversion() {
+		//Arrange
+		target.setLowTemperature(67);
+		
+		//Act
+		String actual = target.getConversionLowTempToCelsius();
+		
+		//Assert
+		assertEquals("19", actual);
+	}
 	
+	@Test
+	public void high_temp_calculation_returns_correct_celsius_conversion() {
+		//Arrange
+		target.setHighTemperature(67);
+		
+		//Act
+		String actual = target.getConversionHighTempToCelsius();
+		
+		//Assert
+		assertEquals("19", actual);
+	}
 	
 	
 	

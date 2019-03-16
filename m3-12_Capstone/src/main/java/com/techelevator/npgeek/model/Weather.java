@@ -74,5 +74,17 @@ public class Weather {
 		return "";
 	}
 	
+	public String getConversionLowTempToCelsius() {
+		int lowInt = (int) ((lowTemperature - 32) / 1.8);
+		String low = Integer.toString(lowInt);
+		return low;
+	}
+	
+	public String getConversionHighTempToCelsius() {
+		int lowInt = (int) ((highTemperature - 32) / 1.8);
+		String low = Integer.toString(lowInt);
+		return low;
+	}
+	
 
 }

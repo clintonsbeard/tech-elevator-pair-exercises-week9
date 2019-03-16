@@ -48,10 +48,10 @@
 				<c:out value="${dailyWeather.day}"/>
 				<c:choose>
 					<c:when test="${tempChoice.equals('C')}">
-						<fmt:formatNumber var="low" value="${(dailyWeather.lowTemperature - 32) / 1.8}" maxFractionDigits="0"/>
-						<fmt:formatNumber var="high" value="${(dailyWeather.highTemperature - 32) / 1.8}" maxFractionDigits="0"/>
-						<c:out value="Low: ${low}°C"/>
-						<c:out value="High: ${high}°C"/>
+						<%-- <fmt:formatNumber var="low" value="${(dailyWeather.lowTemperature - 32) / 1.8}" maxFractionDigits="0"/>
+						<fmt:formatNumber var="high" value="${(dailyWeather.highTemperature - 32) / 1.8}" maxFractionDigits="0"/> --%>
+						<c:out value="Low: ${dailyWeather.conversionLowTempToCelsius}°C"/>
+						<c:out value="High: ${dailyWeather.conversionHighTempToCelsius}°C"/>
 					</c:when>
 					<c:otherwise>
 						<c:out value="Low: ${dailyWeather.lowTemperature}°F"/>
