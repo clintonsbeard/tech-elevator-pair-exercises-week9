@@ -72,3 +72,7 @@
 #footer {
 	grid-area: footer;
 }
+
+#description:hover > div {
+	display: block;
+}

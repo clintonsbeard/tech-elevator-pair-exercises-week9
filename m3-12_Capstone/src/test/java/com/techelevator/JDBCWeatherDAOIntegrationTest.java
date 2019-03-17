@@ -2,20 +2,18 @@ package com.techelevator;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.datasource.SingleConnectionDataSource;
 
 import com.techelevator.npgeek.model.Weather;
 import com.techelevator.npgeek.model.jdbc.JDBCWeatherDAO;
 
 public class JDBCWeatherDAOIntegrationTest extends DAOIntegrationTest {
 
-	private String parkCode;
-	private static SingleConnectionDataSource dataSource;
 	private JDBCWeatherDAO dao;
 	private JdbcTemplate jdbcTemplate;
 	
@@ -36,4 +34,20 @@ public class JDBCWeatherDAOIntegrationTest extends DAOIntegrationTest {
 		//Assert
 		assertEquals(5, numberOfForecast);	
 	}
+	
+	@Test
+	public void get_correct_forecast() {
+		//Arrange
+		//Act
+		List<Weather> forecasts = dao.getFiveDayForecast("GNP");
+		//Assert
+		assertEquals("snow", forecasts.get(0).getForecast());
+		assertEquals("snow", forecasts.get(1).getForecast());
+		assertEquals("partly cloudy", forecasts.get(2).getForecast());
+		assertEquals("cloudy", forecasts.get(3).getForecast());
+		assertEquals("snow", forecasts.get(4).getForecast());
+	}
+	
+
+
 }

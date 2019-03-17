@@ -154,7 +154,63 @@ public class WeatherTest {
 		assertEquals("19", actual);
 	}
 	
+	@Test
+	public void day_of_week_correctly_returns_today() {
+		//Arrange
+		target.setDay(1);
+		
+		//Act
+		String actual = target.getDayOfTheWeek(1);
+		
+		//Assert
+		assertEquals("Saturday", actual);
+	}
 	
+	@Test
+	public void day_of_week_correctly_return_two_days_out() {
+		//Arrange
+		target.setDay(1);
+		
+		//Act
+		String actual = target.getDayOfTheWeek(3);
+		
+		//Assert
+		assertEquals("Monday", actual);
+	}
+	
+	@Test
+	public void day_of_week_correctly_return_when_given_number_greater_than_7() {
+		//Arrange
+		target.setDay(8);
+		
+		//Act
+		String actual = target.getDayOfTheWeek(8);
+		
+		//Assert
+		assertEquals("Saturday", actual);
+	}
+	
+	@Test
+	public void day_of_week_correctly_return_when_given_0() {
+		//Arrange
+		target.setDay(0);
+		
+		//Act
+		String actual = target.getDayOfTheWeek(0);
+		
+		//Assert
+		assertEquals("Friday", actual);
+	}
+	
+	@Test
+	public void first_letter_returns_as_capitalized() {
+		//Arrange
+		//Act
+		String actual = target.capitalizeFirstLetter("elbow");
+		
+		//Assert
+		assertEquals("Elbow", actual);
+	}
 	
 
 }
