@@ -1,9 +1,6 @@
 package com.techelevator.npgeek.model;
 
-import java.text.SimpleDateFormat;
 import java.time.DayOfWeek;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Calendar;
 
 public class Weather {

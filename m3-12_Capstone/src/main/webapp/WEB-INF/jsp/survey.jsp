@@ -18,11 +18,11 @@
       <li>Your activity level (inactive, sedentary, active, or extremely active)</li>
     </ul>
     <p>Thank you for participating!</p>
-	<p><small>Any information you provide below is used <strong>only</strong> for surveying purposes.</small></p>
+	<p><small class="text-muted">Any information you provide below is used <strong>only</strong> for surveying purposes.</small></p>
 	<c:url var="surveyUrl" value="/survey"/>
 	<form:form action="${surveyUrl}" method="POST" modelAttribute="survey">
 	<c:if test="${not empty errors}">
-		<div class="alert alert-danger" role="alert">
+		<div class="alert alert-danger alert-dismissible fade show" role="alert">
 			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 	    		<span aria-hidden="true">&times;</span>
 	  		</button>
@@ -41,7 +41,7 @@
 		</div>
 	</c:if>
 		<div class="form-group row">
-			<label for="favoritePark" class="col-sm-3 col-form-label"><strong>Favorite National Park</strong></label>
+			<label for="favoritePark" class="col-sm-2 col-form-label"><strong>Favorite National Park</strong></label>
 			<div class="col-sm-6">
 				<select id="code" name="code" class="form-control">
 					<%-- <c:choose>
@@ -66,13 +66,13 @@
 			</div>
 		</div>
 		<div class="form-group row">
-			<label for="email" class="col-sm-3 col-form-label"><strong>Email</strong></label>
+			<label for="email" class="col-sm-2 col-form-label"><strong>Email</strong></label>
 			<div class="col-sm-6">
    				<form:input type="email" class="form-control" path="email" placeholder="Email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email'"/>
 			</div>
 		</div>
 		<div class="form-group row">
-			<label for="state" class="col-sm-3 col-form-label"><strong>State of Residence</strong></label>
+			<label for="state" class="col-sm-2 col-form-label"><strong>State of Residence</strong></label>
 			<div class="col-sm-6">
 				<select id="state" name="state" class="form-control">
 					<option selected="selected" disabled>Choose...</option>
@@ -131,7 +131,7 @@
 			</div>
 		</div>
 		<div class="form-group row">
-	   		<label for="activityLevel" class="col-sm-3 col-form-label"><strong>Physical Activity Level</strong></label>
+	   		<label for="activityLevel" class="col-sm-2 col-form-label"><strong>Physical Activity Level</strong></label>
 	   		<div class="col-sm-6">
 		   		<select id="activityLevel" name="activityLevel" class="form-control">
 		   			<option selected="selected" disabled>Choose...</option>
@@ -143,7 +143,7 @@
 			</div>
 		</div>
 		<div class="form-group row">
-    		<div class="col-sm-3">
+    		<div class="col-sm-12 center-block text-center">
      			<button type="submit" class="btn btn-dark">Submit</button>
     		</div>
   		</div>

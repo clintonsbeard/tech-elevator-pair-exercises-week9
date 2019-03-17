@@ -16,44 +16,92 @@
 			<h2><strong><c:out value="Located in:"/></strong> <c:out value="${park.state}"/></h2>
 			<hr class="my-4">
 			<p><c:out value="${park.parkDescription}"/></p>
-			<blockquote class="blockquote text-center">
+			<blockquote class="blockquote text-right">
 						<p class="mb-0"><c:out value="&quot;${park.inspirationalQuote}&quot;"/></p>
 						<footer class="blockquote-footer"><cite>${park.inspirationalQuoteSource}</cite></footer>
 			</blockquote>
 			<hr class="my-4">
 			<div class="container-fluid">
 				<div class="row">
-					<div class="col">
-						<h3><c:out value="Acreage"/></h3>
-						<p><c:out value="${park.formatNumberWithCommas(park.acreage)} acres"/></p>
-						<h3><c:out value="Elevation"/></h3>
-						<p><c:out value="${park.formatNumberWithCommas(park.elevationInFeet)} feet"/></p>
-						<h3><c:out value="Miles of Trail"/></h3>
-						<p><c:out value="${park.formatNumberWithCommas(park.milesOfTrail)} miles"/></p>
-						<h3><c:out value="Number of Campsites"/></h3>
-						<p><c:out value="${park.formatNumberWithCommas(park.numberOfCampsites)} campsites"/></p>
+					<div class="col-lg-6">
+						<div class="data-left">
+							<div class="icon-left center-block text-center">
+								<i class="fas fa-map-marked-alt icon fa-3x"></i>
+							</div>
+							<h1><c:out value="Acreage"/></h1>
+							<h5><c:out value="${park.formatNumberWithCommas(park.acreage)} acres"/></h5>
+						</div>
+						<div class="data-left">
+							<div class="icon-left center-block text-center">
+								<i class="fas fa-mountain fa-3x"></i>
+							</div>
+							<h1><c:out value="Elevation"/></h1>
+							<h5><c:out value="${park.formatNumberWithCommas(park.elevationInFeet)} feet"/></h5>
+						</div>
+						<div class="data-left">
+							<div class="icon-left center-block text-center">
+								<i class="fas fa-map-signs fa-3x"></i>
+							</div>
+							<h1><c:out value="Miles of Trail"/></h1>
+							<h5><c:out value="${park.formatNumberWithCommas(park.milesOfTrail)} miles"/></h5>
+						</div>
+						<div class="data-left">
+							<div class="icon-left center-block text-center">
+								<i class="fas fa-campground fa-3x"></i>
+							</div>
+							<h1><c:out value="Number of Campsites"/></h1>
+							<h5><c:out value="${park.formatNumberWithCommas(park.numberOfCampsites)} campsites"/></h5>
+						</div>
+						<div class="data-left">
+							<div class="icon-left center-block text-center">
+								<i class="fas fa-temperature-high fa-3x"></i>
+							</div>
+							<h1><c:out value="Climate"/></h1>
+							<h5><c:out value="${park.climate}"/></h5>
+						</div>
 					</div>
-					<div class="col">
-						<h3><c:out value="Climate"/></h3>
-						<p><c:out value="${park.climate}"/></p>
-						<h3><c:out value="Year Founded"/></h3>
-						<p><c:out value="${park.yearFounded}"/></p>
-						<h3><c:out value="Annual Visitor Count:"/></h3>
-						<p><c:out value="${park.formatNumberWithCommas(park.annualVisitorCount)} visitors"/></p>
-						<h3><c:out value="Entry Fee:"/></h3>
-						<p><c:out value="${park.formatMoney(park.entryFee)}"/></p>
-						<h3><c:out value="Number of Animal Species:"/></h3>
-						<p><c:out value="${park.numberOfAnimalSpecies} different animal species"/></p>
+					<div class="col-lg-6">
+						<div class="data-right">
+							<div class="icon-right center-block text-center">
+								<i class="fas fa-flag fa-3x"></i>
+							</div>
+							<h1><c:out value="Year Founded"/></h1>
+							<h5><c:out value="${park.yearFounded}"/></h5>
+						</div>
+						<div class="data-right">
+							<div class="icon-right center-block text-center">
+								<i class="fas fa-users fa-3x"></i>
+							</div>
+							<h1><c:out value="Annual Visitors"/></h1>
+							<h5><c:out value="${park.formatNumberWithCommas(park.annualVisitorCount)} visitors"/></h5>
+						</div>
+						<div class="data-right">
+							<div class="icon-right center-block text-center">
+								<i class="fas fa-money-bill-wave fa-3x"></i>
+							</div>
+							<h1><c:out value="Entry Fee"/></h1>
+							<h5><c:out value="${park.formatMoney(park.entryFee)}"/></h5>
+						</div>
+						<div class="data-right">
+							<div class="icon-right center-block text-center">
+								<i class="fas fa-paw fa-3x"></i>
+							</div>
+							<h1><c:out value="Animal Species"/></h1>
+							<h5><c:out value="${park.numberOfAnimalSpecies} different animal species"/></h5>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-		<div class="container-fluid">
-			<div class="row">
-				<c:forEach items="${weather}" var="dailyWeather" varStatus="loop">
+	</div>
+	<div class="container-fluid">
+		<div class="jumbotron">
+			<div class="container-fluid">
+				<div class="row">
+					<c:forEach items="${weather}" var="dailyWeather" varStatus="loop">
 					<c:choose>
 						<c:when test="${loop.index == 0}">
-							<div class="col-sm-3">
+							<div class="col-sm-4 align-self-center center-block text-center">
 								<c:url value="img/weather/${dailyWeather.forecast}.png" var="weatherImage"/>
 								<div class="thumbnail">
 									<img src="${weatherImage}" class="img-fluid img-thumbnail">
@@ -85,7 +133,7 @@
 								</div>
 						</c:when>
 						<c:otherwise>
-							<div class="col-sm-2">
+							<div class="col-sm-2 align-self-center center-block text-center">
 								<c:url value="img/weather/${dailyWeather.forecast}.png" var="weatherImage"/>
 								<div class="thumbnail">
 									<img src="${weatherImage}" class="img-fluid img-thumbnail">
@@ -117,15 +165,17 @@
 								</div>
 						</c:otherwise>
 					</c:choose>
-						<strong><c:out value="Forecast: "/></strong><c:out value="${dailyWeather.capitalizeFirstLetter(dailyWeather.forecast)}"/>
+						<strong><c:out value="Forecast: "/></strong>
+						<p><c:out value="${dailyWeather.capitalizeFirstLetter(dailyWeather.forecast)}"/></p>
 						<strong><c:out value="Advisory: "/></strong>
-						<c:out value="${dailyWeather.weatherAdvisory}"/>
-            			<c:out value="${dailyWeather.tempAdvisory}"/>
-            			<c:out value="${dailyWeather.differenceInTempAdvisory}"/>
+						<p><c:out value="${dailyWeather.weatherAdvisory}"/></p>
+            			<p><c:out value="${dailyWeather.tempAdvisory}"/></p>
+            			<p><c:out value="${dailyWeather.differenceInTempAdvisory}"/></p>
 					</div>
 				</c:forEach>
-			</div>
-	  	</div>
+				</div>
+		  	</div>
+		</div>
 	</div>
 </div>
 
