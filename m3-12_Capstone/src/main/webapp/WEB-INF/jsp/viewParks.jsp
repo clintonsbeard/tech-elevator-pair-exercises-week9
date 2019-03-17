@@ -21,7 +21,7 @@
 						<h1><a href="${parkDetailURL}"><c:out value="${park.name}"/></a></h1>
 						<h2><strong>Located in:</strong> <c:out value="${park.state}"/></h2>
 						<hr class="my-4">
-						<p><c:out value="${park.parkDescription}"/></p>
+						<p id=description><c:out value="${park.parkDescription}"/></p>
 						<p class="lead">
 					    	<a class="btn btn-dark btn-lg" href="${parkDetailURL}" role="button">Learn more</a>
 					  	</p>
