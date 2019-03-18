@@ -17,7 +17,7 @@
 					<a href="${parkDetailURL}"><img src="${image}" class="image img-fluid img-thumbnail"></a>
 				</div>
 				<div class="col-lg-6">
-					<div class="jumbotron">
+					<div class="jumbotron park-card">
 						<h1><a href="${parkDetailURL}"><c:out value="${park.name}"/></a></h1>
 						<h2><strong>Located in:</strong> <c:out value="${park.state}"/></h2>
 						<hr class="my-4">

@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<c:set var="pageTitle" value="Home Page"/>
+<c:set var="pageTitle" value="${park.name} Details"/>
 <%@ include file="common/header.jsp" %>
 
 <div id="content">
@@ -17,8 +17,8 @@
 			<hr class="my-4">
 			<p><c:out value="${park.parkDescription}"/></p>
 			<blockquote class="blockquote text-right">
-						<p class="mb-0"><c:out value="&quot;${park.inspirationalQuote}&quot;"/></p>
-						<footer class="blockquote-footer"><cite>${park.inspirationalQuoteSource}</cite></footer>
+				<p class="mb-0"><c:out value="&quot;${park.inspirationalQuote}&quot;"/></p>
+				<footer class="blockquote-footer"><cite>${park.inspirationalQuoteSource}</cite></footer>
 			</blockquote>
 			<hr class="my-4">
 			<div class="container-fluid">
@@ -97,85 +97,160 @@
 	<div class="container-fluid">
 		<div class="jumbotron">
 			<div class="container-fluid">
+				<h1 class="display-4">Five Day Weather Report <span class="badge badge-secondary badge-success"><c:out value="${park.code.toUpperCase()}"/></span></h1>
 				<div class="row">
-					<c:forEach items="${weather}" var="dailyWeather" varStatus="loop">
-					<c:choose>
-						<c:when test="${loop.index == 0}">
-							<div class="col-sm-4 align-self-center center-block text-center">
+				    <c:forEach items="${weather}" var="dailyWeather" varStatus="loop">
+					    <c:choose>
+						    <c:when test="${loop.index == 0}">
+	                            <div class="col-sm-4 align-self-center center-block text-center">
+	                            <c:url value="img/weather/${dailyWeather.forecast}.png" var="weatherImage"/>
+	                                <div class="thumbnail">
+	                                    <img src="${weatherImage}" class="img-fluid">
+	                                    <div class="caption">
+	                    					<div class="h1">
+	                    	                    <strong><c:out value="${dailyWeather.getDayOfTheWeek(dailyWeather.day)}"/></strong>
+	                    	                </div>
+	                                        <c:choose>
+	                                            <c:when test="${tempChoice.equals('C')}">
+	                                            <c:url var="tempURL" value="/switchTemperature">
+	                                                <c:param name="tempChoice" value="F"/>
+	                                                <c:param name="parkCode" value="${park.code}"/>
+	                                            </c:url>
+	                                                <div class="h2">
+	                                                	<strong><c:out value="Low: "/></strong>
+	                                                	<c:out value="${dailyWeather.conversionLowTempToCelsius}°C | "/>
+	                                                	<a href="${tempURL}"><c:out value="°F"/></a>
+	                                                </div>
+	                                                <div class="h2">
+	                                                	<strong><c:out value="High: "/></strong>
+	                                                	<c:out value="${dailyWeather.conversionHighTempToCelsius}°C | "/>
+	                                                	<a href="${tempURL}"><c:out value="°F"/></a>
+	                                                </div>
+	                                            </c:when>
+	                                            <c:otherwise>
+	                                            <c:url var="tempURL" value="/switchTemperature">
+	                                                <c:param name="tempChoice" value="C"/>
+	                                                <c:param name="parkCode" value="${park.code}"/>
+	                                            </c:url>
+	                                                <div class="h2">
+	                                                	<strong><c:out value="Low: "/></strong>
+	                                               		<c:out value="${dailyWeather.lowTemperature}°F | "/>
+	                                               		<a href="${tempURL}"><c:out value="°C"/></a>
+	                                               	</div>
+	                                                <div class="h2">
+	                                                	<strong><c:out value="High: "/></strong>
+	                                                	<c:out value="${dailyWeather.highTemperature}°F | "/>
+	                                                	<a href="${tempURL}"><c:out value="°C"/></a>
+	                                                </div>
+	                                            </c:otherwise>
+	                                        </c:choose>
+	                                        <div class="h2">
+	                                        	<strong><c:out value="Forecast: "/></strong>
+	                                        	<c:out value="${dailyWeather.capitalizeFirstLetter(dailyWeather.forecast)}"/>
+	                                        </div>
+	                                        <div class="h2">
+	                                        	<strong><c:out value="Current Advisories:"/></strong>
+	                                        </div>
+	                                        <c:forEach items="${dailyWeather.advisories}" var="advisory" varStatus="loop">
+                                        		<c:choose>
+                                        			<c:when test="${advisory == 'No current advisories.  Enjoy!'}">
+                                        				<div class="h3">
+                                        					<c:out value="${advisory}"/>
+                                        				</div>
+                                        			</c:when>
+                                        			<c:when test="${loop.index == 0}">
+                                        				<div class="h3">
+                                        					<strong><c:out value="WARNING:"/></strong>
+                                        					<c:out value="${advisory}"/>
+                                        				</div>
+                                        			</c:when>
+                                        			<c:otherwise>
+                                        				<div class="h3">
+                                        					<strong><c:out value="WARNING:"/></strong>
+                                        					<c:out value="${advisory}"/>
+                                        				</div>
+                                        			</c:otherwise>
+                                        		</c:choose>
+	                                        </c:forEach>
+	                                    </div>
+	                                </div>
+	                            </div>
+						    </c:when>
+						    <c:otherwise>
+							    <div class="col-sm-2 align-self-center center-block text-center">
 								<c:url value="img/weather/${dailyWeather.forecast}.png" var="weatherImage"/>
-								<div class="thumbnail">
-									<img src="${weatherImage}" class="img-fluid img-thumbnail">
-										<div class="caption">
-										<h1><c:out value="${dailyWeather.getDayOfTheWeek(dailyWeather.day)}"/></h1>
-										<c:choose>
-											<c:when test="${tempChoice.equals('C')}">
-												<c:url var="tempURL" value="/switchTemperature">
-													<c:param name="tempChoice" value="F"/>
-													<c:param name="parkCode" value="${park.code}"/>
-												</c:url>
-												<h3><c:out value="Low: ${dailyWeather.conversionLowTempToCelsius}°C | "/>
-												<a href="${tempURL}"><c:out value="°F"/></a></h3>
-				                    			<h3><c:out value="High: ${dailyWeather.conversionHighTempToCelsius}°C | "/>
-				                    			<a href="${tempURL}"><c:out value="°F"/></a></h3>
-											</c:when>
-											<c:otherwise>
-												<c:url var="tempURL" value="/switchTemperature">
-													<c:param name="tempChoice" value="C"/>
-													<c:param name="parkCode" value="${park.code}"/>
-												</c:url>
-												<h3><c:out value="Low: ${dailyWeather.lowTemperature}°F | "/>
-												<a href="${tempURL}"><c:out value="°C"/></a></h3>
-				                    			<h3><c:out value="High: ${dailyWeather.highTemperature}°F | "/>
-				                    			<a href="${tempURL}"><c:out value="°C"/></a></h3>
-											</c:otherwise>
-										</c:choose>
+								    <div class="thumbnail">
+									    <img src="${weatherImage}" class="img-fluid">
+									    <div class="caption">
+									    	<div class="h2">
+	                    	                    <strong><c:out value="${dailyWeather.getDayOfTheWeek(dailyWeather.day)}"/></strong>
+	                    	                </div>
+	                                        <c:choose>
+	                                            <c:when test="${tempChoice.equals('C')}">
+	                                            <c:url var="tempURL" value="/switchTemperature">
+	                                                <c:param name="tempChoice" value="F"/>
+	                                                <c:param name="parkCode" value="${park.code}"/>
+	                                            </c:url>
+	                                                <div class="h3">
+	                                                	<strong><c:out value="Low: "/></strong>
+	                                                	<c:out value="${dailyWeather.conversionLowTempToCelsius}°C | "/>
+	                                                	<a href="${tempURL}"><c:out value="°F"/></a>
+	                                                </div>
+	                                                <div class="h3">
+	                                                	<strong><c:out value="High: "/></strong>
+	                                                	<c:out value="${dailyWeather.conversionHighTempToCelsius}°C | "/>
+	                                                	<a href="${tempURL}"><c:out value="°F"/></a>
+	                                                </div>
+	                                            </c:when>
+	                                            <c:otherwise>
+	                                            <c:url var="tempURL" value="/switchTemperature">
+	                                                <c:param name="tempChoice" value="C"/>
+	                                                <c:param name="parkCode" value="${park.code}"/>
+	                                            </c:url>
+	                                                <div class="h3">
+	                                                	<strong><c:out value="Low: "/></strong>
+	                                               		<c:out value="${dailyWeather.lowTemperature}°F | "/>
+	                                               		<a href="${tempURL}"><c:out value="°C"/></a>
+	                                               	</div>
+	                                                <div class="h3">
+	                                                	<strong><c:out value="High: "/></strong>
+	                                                	<c:out value="${dailyWeather.highTemperature}°F | "/>
+	                                                	<a href="${tempURL}"><c:out value="°C"/></a>
+	                                                </div>
+	                                            </c:otherwise>
+	                                        </c:choose>
+	                                        <div class="h3">
+	                                        	<strong><c:out value="Forecast: "/></strong>
+	                                            <c:out value="${dailyWeather.capitalizeFirstLetter(dailyWeather.forecast)}"/>
+	                                        </div>
+	                                        <button type="button" class="btn btn-secondary" data-placement="bottom" data-toggle="tooltip" data-html="true"
+	                                        title="
+	                                        	<c:forEach items="${dailyWeather.advisories}" var="advisory" varStatus="loop">
+	                                        		<c:choose>
+	                                        			<c:when test="${advisory == 'No current advisories.  Enjoy!'}">
+	                                        				<c:out value="${advisory}"/>
+	                                        			</c:when>
+	                                        			<c:when test="${loop.index == 0}">
+	                                        				<strong><c:out value="WARNING:"/></strong>
+	                                        				<c:out value="${advisory}"/>
+	                                        			</c:when>
+	                                        			<c:otherwise>
+	                                        				<br><strong><c:out value="WARNING:"/></strong>
+	                                        				<c:out value="${advisory}"/>
+	                                        			</c:otherwise>
+	                                        		</c:choose>
+	                                        	</c:forEach>">
+	                                            <strong><c:out value="View Advisories"/></strong>
+	                                        </button>
+									    </div>
 									</div>
 								</div>
-						</c:when>
-						<c:otherwise>
-							<div class="col-sm-2 align-self-center center-block text-center">
-								<c:url value="img/weather/${dailyWeather.forecast}.png" var="weatherImage"/>
-								<div class="thumbnail">
-									<img src="${weatherImage}" class="img-fluid img-thumbnail">
-									<div class="caption">
-									<h2><c:out value="${dailyWeather.getDayOfTheWeek(dailyWeather.day)}"/></h2>
-										<c:choose>
-											<c:when test="${tempChoice.equals('C')}">
-												<c:url var="tempURL" value="/switchTemperature">
-													<c:param name="tempChoice" value="F"/>
-													<c:param name="parkCode" value="${park.code}"/>
-												</c:url>
-												<h4><c:out value="Low: ${dailyWeather.conversionLowTempToCelsius}°C | "/>
-												<a href="${tempURL}"><c:out value="°F"/></a></h4>
-				                    			<h4><c:out value="High: ${dailyWeather.conversionHighTempToCelsius}°C | "/>
-				                    			<a href="${tempURL}"><c:out value="°F"/></a></h4>
-											</c:when>
-											<c:otherwise>
-												<c:url var="tempURL" value="/switchTemperature">
-													<c:param name="tempChoice" value="C"/>
-													<c:param name="parkCode" value="${park.code}"/>
-												</c:url>
-												<h4><c:out value="Low: ${dailyWeather.lowTemperature}°F | "/>
-												<a href="${tempURL}"><c:out value="°C"/></a></h4>
-				                    			<h4><c:out value="High: ${dailyWeather.highTemperature}°F | "/>
-				                    			<a href="${tempURL}"><c:out value="°C"/></a></h4>
-											</c:otherwise>
-										</c:choose>
-									</div>
-								</div>
-						</c:otherwise>
-					</c:choose>
-						<strong><c:out value="Forecast: "/></strong>
-						<p><c:out value="${dailyWeather.capitalizeFirstLetter(dailyWeather.forecast)}"/></p>
-						<strong><c:out value="Advisory: "/></strong>
-						<p><c:out value="${dailyWeather.weatherAdvisory}"/></p>
-            			<p><c:out value="${dailyWeather.tempAdvisory}"/></p>
-            			<p><c:out value="${dailyWeather.differenceInTempAdvisory}"/></p>
-					</div>
-				</c:forEach>
-				</div>
-		  	</div>
-		</div>
+						    </c:otherwise>
+					    </c:choose>
+				    </c:forEach>
+		  	    </div>
+		    </div>
+	    </div>
 	</div>
 </div>
 

@@ -1,7 +1,9 @@
 package com.techelevator.npgeek.model;
 
 import java.time.DayOfWeek;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 public class Weather {
 
@@ -22,7 +24,7 @@ public class Weather {
 		return day;
 	}
 	public void setDay(int day) {
-		this.day = day;
+		this.day = day - 1;
 	}
 	
 	public int getLowTemperature() {
@@ -46,35 +48,59 @@ public class Weather {
 		this.forecast = forecast;
 	}
 	
+	public List<String> getAdvisories() {
+		List<String> advisories = new ArrayList<>();
+		String weatherAdvisory = getWeatherAdvisory();
+		String tempAdvisory = getTempAdvisory();
+		String differenceInTempAdvisory = getDifferenceInTempAdvisory();
+		if (weatherAdvisory.equals("none") && tempAdvisory.equals("none")
+			&& differenceInTempAdvisory.equals("none")) {
+			advisories.add("No current advisories.  Enjoy!");
+			return advisories;
+		}
+		if (!weatherAdvisory.equals("none")) {
+			advisories.add(weatherAdvisory);
+		}
+		if (!tempAdvisory.equals("none")) {
+			advisories.add(tempAdvisory);
+		}
+		if (!differenceInTempAdvisory.equals("none")) {
+			advisories.add(differenceInTempAdvisory);
+		}
+		return advisories;
+	}
+	
 	public String getWeatherAdvisory() {
-		 
 		if (forecast.equals("rain")) {
 			return "Pack rain gear and waterproof shoes!";
-		} else if (forecast.equals("thunderstorms")) {
+		}
+		else if (forecast.equals("thunderstorms")) {
 			return "Seek shelter and avoid hiking on exposed ridges!";
-		} else if (forecast.equals("snow")) {
+		}
+		else if (forecast.equals("snow")) {
 			return "Pack snow shoes!";
-		} else if (forecast.equals("sunny")) {
+		}
+		else if (forecast.equals("sunny")) {
 			return "Pack sunblock!";
 		}
-		return "";
+		return "none";
 	}
 	
 	public String getTempAdvisory() {
-		
 		if (highTemperature > 75 || lowTemperature > 75) {
 			return "Bring an extra gallon of water!";
-		} else if (highTemperature < 20 || lowTemperature < 20) {
+		}
+		else if (highTemperature < 20 || lowTemperature < 20) {
 			return "Danger! Frigid temperatures! FROST BITE may occur";
 		}
-		return "";
+		return "none";
 	}
 	
 	public String getDifferenceInTempAdvisory() {
 		if (highTemperature - lowTemperature > 20) {
 			return "Wear breathable layers!";
 		}
-		return "";
+		return "none";
 	}
 	
 	public String getConversionLowTempToCelsius() {
@@ -92,9 +118,12 @@ public class Weather {
 	public String getDayOfTheWeek(int day) {
 		Calendar calendar = Calendar.getInstance();
 		int currentDay = calendar.get(Calendar.DAY_OF_WEEK);
-		int dayOfWeek = (currentDay + day) - 2;
+		int dayOfWeek = currentDay + (day - 1);
 		if (dayOfWeek > 7) {
 			dayOfWeek = dayOfWeek - 7;
+		}
+		else if (dayOfWeek == 0) {
+			dayOfWeek = 7;
 		}
 		String dayCapitalized = DayOfWeek.of(dayOfWeek).toString();
 		String dayOfTheWeek = capitalizeFirstLetter(dayCapitalized);

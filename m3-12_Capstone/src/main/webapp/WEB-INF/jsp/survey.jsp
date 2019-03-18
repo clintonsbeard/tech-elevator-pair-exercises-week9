@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<c:set var="pageTitle" value="Home Page"/>
+<c:set var="pageTitle" value="Favorite National Park Survey"/>
 <%@ include file="common/header.jsp" %>
 
 <div id="container">
