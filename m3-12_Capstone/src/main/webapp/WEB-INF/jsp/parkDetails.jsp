@@ -7,7 +7,7 @@
 
 <div id="content">
 	<div class="container-fluid">
-		<div>
+		<div id="park-detail-image">
 			<c:url value="img/parks/${park.code}.jpg" var="parkImage"/>
 			<img src="${parkImage}" class="img-fluid img-thumbnail">
 		</div>
@@ -25,35 +25,35 @@
 				<div class="row">
 					<div class="col-lg-6">
 						<div class="data-left">
-							<div class="icon-left center-block text-center">
+							<div class="icon-left center-block text-center align-middle">
 								<i class="fas fa-map-marked-alt icon fa-3x"></i>
 							</div>
 							<h1><c:out value="Acreage"/></h1>
 							<h5><c:out value="${park.formatNumberWithCommas(park.acreage)} acres"/></h5>
 						</div>
 						<div class="data-left">
-							<div class="icon-left center-block text-center">
+							<div class="icon-left center-block text-center align-middle">
 								<i class="fas fa-mountain fa-3x"></i>
 							</div>
 							<h1><c:out value="Elevation"/></h1>
 							<h5><c:out value="${park.formatNumberWithCommas(park.elevationInFeet)} feet"/></h5>
 						</div>
 						<div class="data-left">
-							<div class="icon-left center-block text-center">
+							<div class="icon-left center-block text-center align-middle">
 								<i class="fas fa-map-signs fa-3x"></i>
 							</div>
 							<h1><c:out value="Miles of Trail"/></h1>
 							<h5><c:out value="${park.formatNumberWithCommas(park.milesOfTrail)} miles"/></h5>
 						</div>
 						<div class="data-left">
-							<div class="icon-left center-block text-center">
+							<div class="icon-left center-block text-center align-middle">
 								<i class="fas fa-campground fa-3x"></i>
 							</div>
-							<h1><c:out value="Number of Campsites"/></h1>
+							<h1><c:out value="Campsites"/></h1>
 							<h5><c:out value="${park.formatNumberWithCommas(park.numberOfCampsites)} campsites"/></h5>
 						</div>
 						<div class="data-left">
-							<div class="icon-left center-block text-center">
+							<div class="icon-left center-block text-center align-middle">
 								<i class="fas fa-temperature-high fa-3x"></i>
 							</div>
 							<h1><c:out value="Climate"/></h1>
@@ -62,21 +62,21 @@
 					</div>
 					<div class="col-lg-6">
 						<div class="data-right">
-							<div class="icon-right center-block text-center">
+							<div class="icon-right center-block text-center align-middle">
 								<i class="fas fa-flag fa-3x"></i>
 							</div>
 							<h1><c:out value="Year Founded"/></h1>
 							<h5><c:out value="${park.yearFounded}"/></h5>
 						</div>
 						<div class="data-right">
-							<div class="icon-right center-block text-center">
+							<div class="icon-right center-block text-center align-middle">
 								<i class="fas fa-users fa-3x"></i>
 							</div>
 							<h1><c:out value="Annual Visitors"/></h1>
 							<h5><c:out value="${park.formatNumberWithCommas(park.annualVisitorCount)} visitors"/></h5>
 						</div>
 						<div class="data-right">
-							<div class="icon-right center-block text-center">
+							<div class="icon-right center-block text-center align-middle">
 								<i class="fas fa-money-bill-wave fa-3x"></i>
 							</div>
 							<h1><c:out value="Entry Fee"/></h1>
@@ -87,7 +87,7 @@
 								<i class="fas fa-paw fa-3x"></i>
 							</div>
 							<h1><c:out value="Animal Species"/></h1>
-							<h5><c:out value="${park.numberOfAnimalSpecies} different animal species"/></h5>
+							<h5><c:out value="${park.numberOfAnimalSpecies} unique species"/></h5>
 						</div>
 					</div>
 				</div>

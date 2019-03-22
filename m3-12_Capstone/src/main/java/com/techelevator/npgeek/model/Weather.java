@@ -1,8 +1,10 @@
 package com.techelevator.npgeek.model;
 
+import java.text.SimpleDateFormat;
 import java.time.DayOfWeek;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class Weather {
@@ -116,18 +118,13 @@ public class Weather {
 	}
 	
 	public String getDayOfTheWeek(int day) {
-		Calendar calendar = Calendar.getInstance();
-		int currentDay = calendar.get(Calendar.DAY_OF_WEEK);
-		int dayOfWeek = currentDay + (day - 1);
-		if (dayOfWeek > 7) {
-			dayOfWeek = dayOfWeek - 7;
-		}
-		else if (dayOfWeek == 0) {
-			dayOfWeek = 7;
-		}
-		String dayCapitalized = DayOfWeek.of(dayOfWeek).toString();
-		String dayOfTheWeek = capitalizeFirstLetter(dayCapitalized);
-		return dayOfTheWeek;
+	    Calendar calendar = Calendar.getInstance();
+	    calendar.add(Calendar.DAY_OF_WEEK, day);
+	    Date futureDate = calendar.getTime();
+	    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEEE");
+	    String futureDateString = simpleDateFormat.format(futureDate);
+
+	    return futureDateString;
 	}
 	
 	public String capitalizeFirstLetter(String word) {

@@ -1,18 +1,16 @@
-@media (min-width: 576px) {
-	.jumbotron {
-		background-image: linear-gradient(to bottom right, rgba(255, 255, 255, 0.2), rgba(0, 0, 0, 0.1));
-		padding-top: 30px;
-    	padding-bottom: 30px;
-	}
-	.jumbotron h1 {
-		font-weight: bold;
-	}
-	.jumbotron h1 a {
-		color: #62CA13;
-	}
-	.badge-success {
-		background-color: #62CA13;
-	}
+.jumbotron {
+	background-image: linear-gradient(to bottom right, rgba(255, 255, 255, 0.2), rgba(0, 0, 0, 0.1));
+	padding-top: 30px;
+   	padding-bottom: 30px;
+}
+.jumbotron h1 {
+	font-weight: bold;
+}
+.jumbotron h1 a {
+	color: #62CA13;
+}
+.badge-success {
+	background-color: #62CA13;
 }
 
 .park-card h2 {
@@ -34,7 +32,7 @@
 
 #header {
 	grid-area: header;
-	padding: 1%;
+	padding: 2% 3% 2% 1%;
 }
 
 #navbar {
@@ -47,11 +45,12 @@
 }
 
 .icon-left {
+	display: inline-block;
 	color: #62CA13;
-	padding: 2%;
-	margin: 1%;
+	padding: 2% 0% 2% 2%;
+	margin: 0% 10% 1% 0%;
 	float: left;
-	width: 100px;
+	width: 70px;
 }
 
 .data-right {
@@ -60,10 +59,10 @@
 
 .icon-right {
 	color: #62CA13;
-	padding: 2%;
-	margin: 1%;
+	padding: 2% 0% 2% 2%;
+	margin: 0% 10% 0% 0%;
 	float: left;
-	width: 100px;
+	width: 70px;
 }
 
 .h1 {
@@ -92,4 +91,16 @@
 
 #description:hover > div {
 	display: block;
+}
+
+@media only screen and (max-width: 1023px) {
+  	h1 {
+  		font-size: 24px !important;
+  	}
+	h2 {
+		font-size: 14px !important;
+	}
+	h3 {
+		font-size: 12px !important;
+	}
 }

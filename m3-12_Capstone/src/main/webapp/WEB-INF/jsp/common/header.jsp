@@ -27,10 +27,10 @@
 		</button>
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav mr-auto">
-				<li class="nav-item active">
+				<li class="nav-item">
 					<a href="<c:url value="/"/>" class="nav-link">Home</a>
 				</li>
-				<li class="nav-item active">
+				<li class="nav-item">
 					<a href="<c:url value="/survey"/>" class="nav-link">Survey</a>
 				</li>
 			</ul>
