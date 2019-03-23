@@ -44,20 +44,6 @@
 			<label for="favoritePark" class="col-sm-2 col-form-label"><strong>Favorite National Park</strong></label>
 			<div class="col-sm-6">
 				<select id="code" name="code" class="form-control">
-					<%-- <c:choose>
-						<c:when test="${empty remember.code}">
-							<script language="JavaScript" type="text/JavaScript">
-								var code = document.getElementById("code");
-								code.options[code.options.selectedIndex].setAttribute("selected", "selected");
-							</script>
-						</c:when>
-						<c:otherwise>
-							<script language="JavaScript" type="text/JavaScript">
-								var code = document.getElementById("code");
-								code.options[code.options.selectedIndex].setAttribute("selected", "selected");
-							</script>
-						</c:otherwise>
-					</c:choose> --%>
 					<option selected="selected" disabled>Choose...</option>
 					<c:forEach var="park" items="${parks}">
 						<option value="${park.code}">${park.name}</option>

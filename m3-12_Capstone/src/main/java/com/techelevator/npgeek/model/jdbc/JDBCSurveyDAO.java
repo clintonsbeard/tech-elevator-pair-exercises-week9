@@ -25,5 +25,4 @@ public class JDBCSurveyDAO implements SurveyDAO {
 							survey.getState(), survey.getActivityLevel());
 	}
 	
-	
 }

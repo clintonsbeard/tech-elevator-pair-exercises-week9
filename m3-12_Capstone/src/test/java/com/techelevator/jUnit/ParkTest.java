@@ -36,5 +36,4 @@ public class ParkTest {
 		assertEquals("$47.00",actual);
 	}
 	
-	
 }
